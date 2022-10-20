@@ -1,0 +1,39 @@
+<div class="container">
+  <form [formGroup]="registerForm">
+    <div class="field">
+      <label for="username">User Name:</label>
+      <input type="text" formControlName="uname" placeholder="User Name " id="username">
+      <div class="errorMsg"
+        *ngIf="getForm().controls['uname'].touched&&getForm().controls['uname'].errors?.['required']">Please enter user
+        name </div>
+      <div class="errorMsg"
+        *ngIf="getForm().controls['email'].touched&&getForm().controls['uname'].errors?.['invalidname']">Please enter
+        valid user name
+      </div>
+
+    </div>
+    <div class="field">
+      <label for="email">Email:</label>
+      <input type="text" formControlName="email" placeholder="Email" id="email">
+      <div class="errorMsg"
+        *ngIf="getForm().controls['email'].touched&&getForm().controls['email'].errors?.['required']">Please enter email
+      </div>
+      <div class="errorMsg" *ngIf="getForm().controls['email'].touched&&getForm().controls['email'].errors?.['email']">
+        please enter valid email </div>
+    </div>
+    <div class="field">
+      <label for="pwrd">Password:</label>
+      <input type="text" formControlName="pwrd" placeholder="Enter Password" id="pwrd">
+      <div class="errorMsg" *ngIf="getForm().controls['pwrd'].touched&&getForm().controls['pwrd'].errors?.['required']">
+        please enter password</div>
+    </div>
+    <div class="btns-area">
+      <button>Cancel</button>
+      <button type="submit" id="submit" [ngClass]="{'disabled':registerForm.invalid}" #submitbutton
+        [disabled]="registerForm.invalid">Submit</button>
+    </div>
+    <!-- <div class="field">
+      <label>{{registerForm.invalid}}</label>
+    </div> -->
+  </form>
+</div>
