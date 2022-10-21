@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { fromEvent } from 'rxjs';
+import { ApiHandlerService } from './services/api-handler.service';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +13,17 @@ export class AppComponent implements AfterViewInit {
   registerForm!: FormGroup;
   @ViewChild('submitbutton') submitBtn!: ElementRef;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private apiHandler: ApiHandlerService) {
     this.createForm();
     this.handleFormChanges();
   }
   ngAfterViewInit(): void {
     fromEvent(this.submitBtn.nativeElement, 'click').subscribe((data) => {
-      console.log(data);
+      // console.log(data);
+      this.apiHandler.callApi();
     });
+
+    this.apiHandler.callApi();
   }
 
   createForm() {
@@ -59,6 +63,10 @@ export class AppComponent implements AfterViewInit {
   }
   getForm() {
     return this.registerForm;
+  }
+
+  submit() {
+
   }
 }
 
